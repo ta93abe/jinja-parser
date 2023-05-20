@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "api"
+version = "0.1.0"
+description = ""
+authors = ["Takumi Abe <ta93abe@ta93abe.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytest = "^7.3.1"
+fastapi = "^0.95.2"
+uvicorn = "^0.22.0"
+gunicorn = "^20.1.0"
+taskipy = "^1.10.4"
+ruff = "^0.0.269"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+test = { cmd = "pytest tests", help = "Run tests" }
+lint = { cmd = "ruff check --fix api", help = "Run linter" }
+start = { cmd = "uvicorn api.main:app --reload", deps = ["api/main.py"], help = "Start the server" }
